@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hello Web</title>
+  <title>Hello Button</title>
 </head>
 <body>
-  <button onclick="fetch('https://hello-backend.gaba1111.repl.co/')">Kattints ide!</button>
+  <button onclick="getHello()">Kattints ide!</button>
+  <p id="valasz"></p>
+
+  <script>
+    function getHello() {
+      fetch("https://hello-backend.gaba1111.repl.co/")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Hálózati hiba: " + response.status);
+          }
+          return response.text();
+        })
+        .then(data => {
+          document.getElementById("valasz").innerText = data;
+        })
+        .catch(error => {
+          document.getElementById("valasz").innerText = "Hiba: " + error;
+          console.error(error);
+        });
+    }
+  </script>
 </body>
 </html>
